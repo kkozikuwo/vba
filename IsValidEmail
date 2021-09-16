@@ -1,0 +1,30 @@
+Function IsValidEmail(sEmailAddress As String) As Boolean
+    'Code from Officetricks
+    'Define variables
+    Dim sEmailPattern As String
+    Dim oRegEx As Object
+    Dim bReturn As Boolean
+    
+    'Use the below regular expressions
+    sEmailPattern = "^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 'or
+    sEmailPattern = "^([a-zA-Z0-9_\-\.]+)@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$"
+    
+    'Create Regular Expression Object
+    Set oRegEx = CreateObject("VBScript.RegExp")
+    oRegEx.Global = True
+    oRegEx.IgnoreCase = True
+    oRegEx.Pattern = sEmailPattern
+    bReturn = False
+    
+    'Check if Email match regex pattern
+    If oRegEx.Test(sEmailAddress) Then
+        'Debug.Print "Valid Email ('" & sEmailAddress & "')"
+        bReturn = True
+    Else
+        'Debug.Print "Invalid Email('" & sEmailAddress & "')"
+        bReturn = False
+    End If
+
+    'Return validation result
+    IsValidEmail = bReturn
+End Function
